@@ -24,7 +24,6 @@ class AddPostCubit extends Cubit<AddpostState> {
   final TextEditingController captionController = TextEditingController();
   // fire base
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   late UserData user;
 
   Future pickImage(ImageSource source) async {
@@ -41,9 +40,9 @@ class AddPostCubit extends Cubit<AddpostState> {
     emit(AddpostImageFinshed());
   }
 
-  Future<String> uploadPostPic() async {
+  Future<String> uploadPostPic(String uid) async {
     final FirebaseStorage fStorage = FirebaseStorage.instance;
-    final ref = fStorage.ref().child('posts').child(_auth.currentUser!.uid);
+    final ref = fStorage.ref().child('posts').child(uid);
     final uploadTask = ref.putData(file!);
     final snap = await uploadTask;
     final downlaodUrl = await snap.ref.getDownloadURL();
@@ -57,7 +56,7 @@ class AddPostCubit extends Cubit<AddpostState> {
   ) async {
     try {
       emit(AddpostLoading());
-      final postUrl = await uploadPostPic();
+      final postUrl = await uploadPostPic(uid);
       String postId = const Uuid().v1();
 
       Post post = Post(
