@@ -60,18 +60,24 @@ class AddPostCubit extends Cubit<AddpostState> {
       String postId = const Uuid().v1();
 
       Post post = Post(
-          caption: captionController.text,
-          uid: uid,
-          postId: postId,
-          username: username,
-          datePublishd: DateTime.now(),
-          postUrl: postUrl,
-          profilePic: profilePic,
-          likes: []);
+        caption: captionController.text,
+        uid: uid,
+        postId: postId,
+        username: username,
+        datePublishd: DateTime.now(),
+        postUrl: postUrl,
+        profilePic: profilePic,
+        likes: [],
+      );
       _firestore.collection('posts').doc(postId).set(post.toJson());
     } catch (e) {
       showSnackBar(e.toString(), isError: true);
     }
-    emit(AddpostImageFinshed());
+    emit(AddpostInitial());
+  }
+
+  void clearImgae() {
+    file = null;
+    emit(AddpostInitial());
   }
 }
