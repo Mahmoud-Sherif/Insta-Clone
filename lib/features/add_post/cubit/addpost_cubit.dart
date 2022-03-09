@@ -64,7 +64,7 @@ class AddPostCubit extends Cubit<AddpostState> {
         uid: uid,
         postId: postId,
         username: username,
-        datePublishd: DateTime.now(),
+        // datePublishd: DateTime.now(),
         postUrl: postUrl,
         profilePic: profilePic,
         likes: [],

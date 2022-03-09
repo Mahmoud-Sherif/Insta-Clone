@@ -1,4 +1,5 @@
 import 'package:chat_app/features/cubit/main_cubit.dart';
+import 'package:chat_app/features/feed/cubit/feed_cubit.dart';
 import 'package:chat_app/features/home/view.dart';
 import 'package:chat_app/widgets/snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => MainCubit()..getUserData(),
+        ),
+        BlocProvider(
+          create: (context) => FeedCubit()..fetchData(),
         )
       ],
       child: MaterialApp(

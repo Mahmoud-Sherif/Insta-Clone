@@ -5,7 +5,7 @@ class Post {
   final String uid;
   final String postId;
   final String username;
-  final datePublishd;
+  // final DateTime datePublishd;
   final String postUrl;
   final String profilePic;
   final likes;
@@ -14,7 +14,7 @@ class Post {
     required this.uid,
     required this.postId,
     required this.username,
-    required this.datePublishd,
+    // required this.datePublishd,
     required this.postUrl,
     required this.profilePic,
     required this.likes,
@@ -24,21 +24,21 @@ class Post {
         "uid": uid,
         "caption": caption,
         "postId": postId,
-        "datePublishd": datePublishd,
+        // "datePublishd": datePublishd,
         "postUrl": postUrl,
         "profilePic": profilePic,
         "likes": likes
       };
-  static Post fromJson(DocumentSnapshot snap) {
-    final snapShot = snap.data() as Map<String, dynamic>;
+  static Post fromJson(Map<String, dynamic> snapShot) {
+    // final snapShot = snap.data() as Map<String, dynamic>;
     return Post(
-        caption: snapShot["email"],
+        caption: snapShot["caption"],
         uid: snapShot["uid"],
-        postId: snapShot["imageUrl"],
+        postId: snapShot["postId"],
         username: snapShot["username"],
-        datePublishd: snapShot["bio"],
-        postUrl: snapShot["followers"],
-        profilePic: snapShot["following"],
+        // datePublishd: snapShot["datePublishd"],
+        postUrl: snapShot["postUrl"],
+        profilePic: snapShot["profilePic"],
         likes: snapShot["likes"]);
   }
 }
