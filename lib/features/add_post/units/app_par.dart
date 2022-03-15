@@ -6,8 +6,8 @@ AppBar _appBar(AddPostCubit cubit, MainCubit mainCubit) {
     leading: IconButton(
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
-        cubit.clearImgae;
-        MagicRouter.navigateAndPopAll(const HomeView());
+        // cubit.clearImgae;
+        // MagicRouter.navigateAndPopAll(const HomeView());
       },
     ),
     title: const Text(

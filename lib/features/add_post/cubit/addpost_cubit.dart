@@ -69,15 +69,15 @@ class AddPostCubit extends Cubit<AddpostState> {
         profilePic: profilePic,
         likes: [],
       );
-      _firestore.collection('posts').doc(postId).set(post.toJson());
+      await _firestore.collection('posts').doc(postId).set(post.toJson());
     } catch (e) {
       showSnackBar(e.toString(), isError: true);
     }
-    emit(AddpostInitial());
+    emit(AddpostFished());
   }
 
-  void clearImgae() {
-    file = null;
-    emit(AddpostInitial());
-  }
+  // void clearImgae() {
+  //   file = null;
+  //   emit(AddpostInitial());
+  // }
 }

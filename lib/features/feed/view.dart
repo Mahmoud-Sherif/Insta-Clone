@@ -27,9 +27,8 @@ class FeedView extends StatelessWidget {
       body: BlocBuilder(
         bloc: cubit,
         builder: (context, state) {
-          return state is Feedloading
-              ? const LoadingIndicator()
-              : ListView.builder(
+          return cubit.post.isNotEmpty
+              ? ListView.builder(
                   itemCount: cubit.post.length,
                   itemBuilder: (context, index) {
                     final postData = cubit.post[index];
@@ -53,7 +52,8 @@ class FeedView extends StatelessWidget {
                       ),
                     );
                   },
-                );
+                )
+              : const LoadingIndicator();
         },
       ),
     );

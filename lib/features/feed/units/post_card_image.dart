@@ -32,21 +32,6 @@ class _PostCardImage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          AnimatedOpacity(
-            duration: const Duration(milliseconds: 200),
-            opacity: 1,
-            child: LikeAnimation(
-              isAnimating: true,
-              child: const Icon(
-                Icons.favorite,
-                color: Colors.white,
-                size: 100,
-              ),
-              duration: const Duration(
-                milliseconds: 400,
-              ),
-            ),
-          ),
         ],
       ),
     );

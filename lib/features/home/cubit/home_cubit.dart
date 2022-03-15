@@ -1,5 +1,7 @@
 import 'package:chat_app/core/model/user.dart';
 import 'package:chat_app/features/add_post/view.dart';
+import 'package:chat_app/features/cubit/main_cubit.dart';
+import 'package:chat_app/features/feed/cubit/feed_cubit.dart';
 import 'package:chat_app/features/feed/view.dart';
 import 'package:chat_app/features/search/view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
   // final FirebaseAuth _auth = FirebaseAuth.instance;
   // late UserData userData;
 // bootm nav control
+  FeedCubit feedCubit = FeedCubit();
   int bottomNavBarIndex = 0;
   List homeViews = [
     const FeedView(),
@@ -37,7 +40,9 @@ class HomeCubit extends Cubit<HomeState> {
   // }
 
   void navBarController(int value) {
+    
     bottomNavBarIndex = value;
+
     emit(HomeBottomNavBarNavigation());
   }
 }

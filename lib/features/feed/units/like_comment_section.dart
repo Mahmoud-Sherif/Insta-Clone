@@ -8,28 +8,23 @@ class _LikeCommentSection extends StatelessWidget {
   final Post data;
   @override
   Widget build(BuildContext context) {
-    final mainCubit = MainCubit.of(context);
+    final cubit = FeedCubit.of(context);
     return Row(
       children: [
-        LikeAnimation(
-          isAnimating: data.likes.contains(mainCubit.userData.uid),
-          smallLike: true,
-          child: IconButton(
-              icon: data.likes.contains(mainCubit.userData.uid)
-                  ? const Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    )
-                  : const Icon(
-                      Icons.favorite_border,
-                    ),
-              onPressed: () {}
-              //  => FireStoreMethods().likePost(
-              //   widget.snap['postId'].toString(),
-              //   user.uid,
-              //   widget.snap['likes'],
-              // ),
-              ),
+        BlocBuilder(
+          bloc: cubit,
+          builder: (context, state) {
+            return IconButton(
+                icon: data.likes.contains(data.uid)
+                    ? const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    : const Icon(
+                        Icons.favorite_border,
+                      ),
+                onPressed: () {});
+          },
         ),
         IconButton(
           icon: const Icon(

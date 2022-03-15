@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           create: (context) => MainCubit()..getUserData(),
         ),
         BlocProvider(
-          create: (context) => FeedCubit()..fetchData(),
+          create: (context) => FeedCubit()..getPostData(),
         )
       ],
       child: MaterialApp(
