@@ -1,5 +1,7 @@
 import 'package:chat_app/const/colors.dart';
 import 'package:chat_app/core/model/post.dart';
+import 'package:chat_app/core/routes/magic_router.dart';
+import 'package:chat_app/features/comment/view.dart';
 import 'package:chat_app/features/cubit/main_cubit.dart';
 import 'package:chat_app/features/feed/cubit/feed_cubit.dart';
 import 'package:chat_app/widgets/like_animation.dart';

@@ -47,24 +47,16 @@ class _CaptionAndComments extends StatelessWidget {
           ),
           InkWell(
               child: Container(
-                child: Text(
+                child: const Text(
                   'View all  comments',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     color: secondaryColor,
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 4),
               ),
-              onTap: () {}
-              //  Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => CommentsScreen(
-              //       postId: widget.snap['postId'].toString(),
-              //     ),
-              //   ),
-              // ),
-              ),
+              onTap: () {}),
           Container(
             child: Text(
               '22/10/2022',

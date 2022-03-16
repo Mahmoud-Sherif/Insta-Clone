@@ -30,14 +30,10 @@ class _LikeCommentSection extends StatelessWidget {
           icon: const Icon(
             Icons.comment_outlined,
           ),
-          onPressed: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => CommentsScreen(
-            //       postId: widget.snap['postId'].toString(),
-            //     ),
-            //   ),
-            // );
+          onPressed: () async {
+            await MagicRouter.navigateTo(CommentView(
+              postData: data,
+            ));
           },
         ),
         IconButton(
