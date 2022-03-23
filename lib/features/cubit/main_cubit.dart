@@ -25,4 +25,21 @@ class MainCubit extends Cubit<MainState> {
     userData = UserData.fromJson(snap);
     emit(MainInitial());
   }
+
+  Future getUserDataa() async {
+    emit(MainLoadingUserData());
+    User? curenUser = _auth.currentUser;
+    await curenUser?.reload();
+    curenUser = _auth.currentUser;
+    final snap = await _firestore
+        .collection('users')
+        .doc(curenUser!.uid)
+        .snapshots()
+        .listen((event) {
+      userData = UserData.fromJson(event);
+      emit(MainInitial());
+    });
+    // userData = UserData.fromJson(snap);
+    // emit(MainInitial());
+  }
 }

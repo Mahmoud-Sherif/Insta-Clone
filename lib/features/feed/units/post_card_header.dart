@@ -8,6 +8,7 @@ class _PostCardHeader extends StatelessWidget {
   final Post data;
   @override
   Widget build(BuildContext context) {
+    final cubit = FeedCubit.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 4,
@@ -56,19 +57,16 @@ class _PostCardHeader extends StatelessWidget {
                         ]
                             .map(
                               (e) => InkWell(
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 16),
-                                    child: Text(e),
-                                  ),
-                                  onTap: () {
-                                    // deletePost(
-                                    //   widget.snap['postId']
-                                    //       .toString(),
-                                    // );
-                                    // remove the dialog box
-                                    Navigator.of(context).pop();
-                                  }),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 16),
+                                  child: Text(e),
+                                ),
+                                onTap: () async {
+                                  await cubit.deletePost(data.postId);
+                                  Navigator.of(context).pop();
+                                },
+                              ),
                             )
                             .toList()),
                   );

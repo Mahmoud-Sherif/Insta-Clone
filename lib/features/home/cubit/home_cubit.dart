@@ -3,6 +3,7 @@ import 'package:chat_app/features/add_post/view.dart';
 import 'package:chat_app/features/cubit/main_cubit.dart';
 import 'package:chat_app/features/feed/cubit/feed_cubit.dart';
 import 'package:chat_app/features/feed/view.dart';
+import 'package:chat_app/features/profile/view.dart';
 import 'package:chat_app/features/search/view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
     const SearchView(),
     const AddPostView(),
     const SearchView(),
-    const FeedView(),
+    const ProfileView(),
   ];
 
   // Future getUserData() async {
