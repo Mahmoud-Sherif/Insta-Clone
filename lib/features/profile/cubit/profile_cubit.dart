@@ -11,11 +11,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
   static ProfileCubit of(context) => BlocProvider.of(context);
   List<Post> userPost = [];
-
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
+  
   getUserPosts() async {
-    final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final uid = _auth.currentUser!.uid;
     try {
       _fireStore
           .collection('posts')
