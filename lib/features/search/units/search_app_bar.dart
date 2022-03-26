@@ -6,23 +6,33 @@ class _SearchAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = SearchCubit.of(context);
-    return AppBar(
-      backgroundColor: mobileBackgroundColor,
-      title: Form(
-        key: cubit.formKey,
-        child: TextFormField(
-          controller: cubit.searchController,
-          decoration: const InputDecoration(labelText: 'Search for a user...'),
-          onSaved: (s) async {
-            await cubit.getAllUser(s!);
-          },
-          // onFieldSubmitted: (String _) {
-          //   setState(() {
-          //     isShowUsers = true;
-          //   });
-          //   print(_);
-          // },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AppBar(
+        backgroundColor: mobileBackgroundColor,
+        title: Form(
+          key: cubit.formKey,
+          child: TextFormField(
+            // controller: cubit.searchController,
+            decoration:
+                const InputDecoration(labelText: 'Search for a user...'),
+            onSaved: (s) => cubit.text = s!,
+            // onFieldSubmitted: (String _) {
+            //   setState(() {
+            //     isShowUsers = true;
+            //   });
+            //   print(_);
+            // },
+          ),
         ),
+        actions: [
+          IconButton(
+            onPressed: cubit.getSearchedlUser,
+            icon: const Icon(
+              Icons.search_outlined,
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:chat_app/const/colors.dart';
 import 'package:chat_app/features/search/cubit/search_cubit.dart';
+import 'package:chat_app/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'units/search_app_bar.dart';
@@ -13,36 +14,41 @@ class SearchView extends StatelessWidget {
       create: (context) => SearchCubit(),
       child: Scaffold(
           appBar: _SearchAppBar(),
-          body: ListView.builder(
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              final cubit = SearchCubit.of(context);
-              return Container(
-                child: TextButton(onPressed: () {}, child: Text('fsdgdfg')),
-              )
-                  //  InkWell(
-                  //   onTap: () => Navigator.of(context).push(
-                  //     MaterialPageRoute(
-                  //       builder: (context) => ProfileScreen(
-                  //         uid: (snapshot.data! as dynamic).docs[index]['uid'],
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   child: ListTile(
-                  //     leading: CircleAvatar(
-                  //       backgroundImage: NetworkImage(
-                  //         (snapshot.data! as dynamic).docs[index]['photoUrl'],
-                  //       ),
-                  //       radius: 16,
-                  //     ),
-                  //     title: Text(
-                  //       (snapshot.data! as dynamic).docs[index]['username'],
-                  //     ),
-                  //   ),
-                  // )
-                  ;
-            },
-          )
+          body: Builder(builder: (context) {
+            final cubit = SearchCubit.of(context);
+            return BlocBuilder(
+              bloc: cubit,
+              builder: (context, state) {
+                return state is SearchUserDataLoading
+                    ? const LoadingIndicator()
+                    : ListView.builder(
+                        itemCount: cubit.searchedUser.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            // onTap: () => Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) => ProfileScreen(
+                            //       uid: (snapshot.data! as dynamic).docs[index]['uid'],
+                            //     ),
+                            //   ),
+                            // ),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                  cubit.searchedUser[index].imageUrl,
+                                ),
+                                radius: 16,
+                              ),
+                              title: Text(
+                                cubit.searchedUser[index].username,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+              },
+            );
+          })
           // : StaggeredGridView.countBuilder(
           //     crossAxisCount: 3,
           //     itemCount: (snapshot.data! as dynamic).docs.length,

@@ -4,3 +4,7 @@ part of 'search_cubit.dart';
 abstract class SearchState {}
 
 class SearchInitial extends SearchState {}
+
+class SearchUserDataLoading extends SearchState {}
+
+class SearchUserDataFinshed extends SearchState {}
