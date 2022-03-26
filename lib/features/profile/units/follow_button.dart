@@ -15,7 +15,7 @@ class _FollowButton extends StatelessWidget {
                 backgroundColor: mobileBackgroundColor,
                 textColor: primaryColor,
                 borderColor: Colors.grey,
-                function: () async {},
+                function: cubit.signOut,
               )
             :
             // : isFollowing

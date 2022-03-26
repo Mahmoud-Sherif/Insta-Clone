@@ -1,4 +1,6 @@
 import 'package:chat_app/core/model/post.dart';
+import 'package:chat_app/core/routes/magic_router.dart';
+import 'package:chat_app/features/sign_in/view.dart';
 import 'package:chat_app/widgets/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +15,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   List<Post> userPost = [];
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final uid = FirebaseAuth.instance.currentUser!.uid;
-  
+
   getUserPosts() async {
     try {
       _fireStore
@@ -32,5 +34,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     } catch (e) {
       showSnackBar(e.toString(), isError: true);
     }
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    MagicRouter.navigateAndPopAll(const SignInView());
   }
 }
