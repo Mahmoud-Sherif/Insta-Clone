@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:chat_app/core/model/post.dart';
 import 'package:chat_app/widgets/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -36,10 +37,10 @@ class FeedCubit extends Cubit<FeedState> {
     emit(Feedloading());
     _firestore.collection('posts').snapshots().listen((event) {
       post = [];
-      event.docs.forEach((element) {
+      for (var element in event.docs) {
         Post _post = Post.fromJson(element.data());
         post.add(_post);
-      });
+      }
       emit(FeedFinshedloading());
     });
   }
@@ -72,8 +73,10 @@ class FeedCubit extends Cubit<FeedState> {
   // }
 
   Future<void> deletePost(String postId) async {
+    final FirebaseStorage fStorage = FirebaseStorage.instance;
     try {
       _firestore.collection('posts').doc(postId).delete();
+      fStorage.ref().child('posts').child(postId).delete();
       emit(FeedDeletePost());
     } catch (e) {
       showSnackBar(e.toString(), isError: true);

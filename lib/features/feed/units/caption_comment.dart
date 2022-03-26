@@ -59,7 +59,7 @@ class _CaptionAndComments extends StatelessWidget {
               onTap: () {}),
           Container(
             child: Text(
-              '22/10/2022',
+              DateFormat.yMMMd().format(data.postDate),
               style: const TextStyle(
                 color: secondaryColor,
               ),

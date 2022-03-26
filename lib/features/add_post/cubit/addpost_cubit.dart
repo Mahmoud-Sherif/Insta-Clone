@@ -40,9 +40,9 @@ class AddPostCubit extends Cubit<AddpostState> {
     emit(AddpostImageFinshed());
   }
 
-  Future<String> uploadPostPic(String uid) async {
+  Future<String> uploadPostPic(String postId) async {
     final FirebaseStorage fStorage = FirebaseStorage.instance;
-    final ref = fStorage.ref().child('posts').child(uid);
+    final ref = fStorage.ref().child('posts').child(postId);
     final uploadTask = ref.putData(file!);
     final snap = await uploadTask;
     final downlaodUrl = await snap.ref.getDownloadURL();
@@ -56,15 +56,14 @@ class AddPostCubit extends Cubit<AddpostState> {
   ) async {
     try {
       emit(AddpostLoading());
-      final postUrl = await uploadPostPic(uid);
       String postId = const Uuid().v1();
-
+      final postUrl = await uploadPostPic(postId);
       Post post = Post(
         caption: captionController.text,
         uid: uid,
         postId: postId,
         username: username,
-        // datePublishd: DateTime.now(),
+        postDate: DateTime.now(),
         postUrl: postUrl,
         profilePic: profilePic,
         likes: [],
