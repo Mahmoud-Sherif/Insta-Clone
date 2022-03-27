@@ -35,7 +35,11 @@ class FeedCubit extends Cubit<FeedState> {
 
   getPostData() async {
     emit(Feedloading());
-    _firestore.collection('posts').snapshots().listen((event) {
+    _firestore
+        .collection('posts')
+        .orderBy('postDate')
+        .snapshots()
+        .listen((event) {
       post = [];
       for (var element in event.docs) {
         Post _post = Post.fromJson(element.data());

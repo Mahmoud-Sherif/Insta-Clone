@@ -2,10 +2,10 @@ import 'dart:typed_data';
 
 import 'package:chat_app/core/model/post.dart';
 import 'package:chat_app/core/model/user.dart';
-import 'package:chat_app/features/cubit/main_cubit.dart';
+import 'package:chat_app/core/routes/magic_router.dart';
+import 'package:chat_app/features/home/view.dart';
 import 'package:chat_app/widgets/snack_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,6 +69,7 @@ class AddPostCubit extends Cubit<AddpostState> {
         likes: [],
       );
       await _firestore.collection('posts').doc(postId).set(post.toJson());
+      MagicRouter.navigateAndPopAll(const HomeView());
     } catch (e) {
       showSnackBar(e.toString(), isError: true);
     }
