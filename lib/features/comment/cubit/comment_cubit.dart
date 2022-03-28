@@ -58,12 +58,10 @@ class CommentCubit extends Cubit<CommentState> {
         .listen(
       (event) {
         comments = [];
-        event.docs.forEach(
-          (element) {
+        for (var element in event.docs) {
             comments.add(element.data());
             emit(CommentFetchDataFinshed());
-          },
-        );
+          }
       },
     );
   }

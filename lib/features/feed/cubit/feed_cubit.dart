@@ -14,6 +14,7 @@ class FeedCubit extends Cubit<FeedState> {
   static FeedCubit of(context) => BlocProvider.of(context);
 
   List<Post> post = [];
+  List comments = [];
 
   final _firestore = FirebaseFirestore.instance;
 
@@ -37,7 +38,7 @@ class FeedCubit extends Cubit<FeedState> {
     emit(Feedloading());
     _firestore
         .collection('posts')
-        .orderBy('postDate')
+        .orderBy('postDate', descending: true)
         .snapshots()
         .listen((event) {
       post = [];
@@ -47,6 +48,24 @@ class FeedCubit extends Cubit<FeedState> {
       }
       emit(FeedFinshedloading());
     });
+  }
+
+  geCommentData(String postId) {
+    _firestore
+        .collection('posts')
+        .doc(postId)
+        .collection('comments')
+        .orderBy('datePublished')
+        .snapshots()
+        .listen(
+      (event) {
+        comments = [];
+        for (var element in event.docs) {
+          comments.add(element.data());
+        }
+        emit(FeedCommentFinshed());
+      },
+    );
   }
 
   // Future<void> likePost(String postId, String uid, List likes) async {

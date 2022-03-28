@@ -46,17 +46,23 @@ class _CaptionAndComments extends StatelessWidget {
             ),
           ),
           InkWell(
-              child: Container(
-                child: const Text(
-                  'View all  comments',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: secondaryColor,
-                  ),
+            onTap: () async {
+              // await cubit.geCommentData(data.postId);
+              // MagicRouter.navigateTo(
+              //   CommentView(postData: data),
+              // );
+            },
+            child: Container(
+              child: const Text(
+                'View all  comments',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: secondaryColor,
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 4),
               ),
-              onTap: () {}),
+              padding: const EdgeInsets.symmetric(vertical: 4),
+            ),
+          ),
           Container(
             child: Text(
               DateFormat.yMMMd().format(data.postDate),

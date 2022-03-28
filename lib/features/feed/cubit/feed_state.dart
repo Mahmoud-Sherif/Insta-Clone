@@ -16,6 +16,8 @@ class FeedUnLikAnimationStart extends FeedState {}
 class FeedLikUpdate extends FeedState {}
 
 class FeedDeletePost extends FeedState {}
+class FeedCommentFinshed extends FeedState {}
+
 
 
 
