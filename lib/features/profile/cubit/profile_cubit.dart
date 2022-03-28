@@ -1,4 +1,5 @@
 import 'package:chat_app/core/model/post.dart';
+import 'package:chat_app/core/model/user.dart';
 import 'package:chat_app/core/routes/magic_router.dart';
 import 'package:chat_app/features/sign_in/view.dart';
 import 'package:chat_app/widgets/snack_bar.dart';
@@ -13,23 +14,24 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
   static ProfileCubit of(context) => BlocProvider.of(context);
   List<Post> userPost = [];
-  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  final uid = FirebaseAuth.instance.currentUser!.uid;
+  late UserData userData;
 
-  getUserPosts() async {
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  getUserPosts(String uid) async {
     try {
+      final snap = await _fireStore.collection('users').doc(uid).get();
+      userData = UserData.fromJson(snap);
       _fireStore
           .collection('posts')
           .where('uid', isEqualTo: uid)
           .snapshots()
           .listen((event) {
-        emit(ProfiUserPostsLoadding());
+        emit(ProfileUserPostsLoadding());
         userPost = [];
-        event.docs.forEach((element) {
+        for (var element in event.docs) {
           userPost.add(Post.fromJson(element.data()));
-
-          emit(ProfiUserPostsFinshed());
-        });
+          emit(ProfileUserPostsFinshed());
+        }
       });
     } catch (e) {
       showSnackBar(e.toString(), isError: true);

@@ -5,7 +5,7 @@ class _UserProfilePIc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = MainCubit.of(context);
+    final cubit = ProfileCubit.of(context);
 
     return CircleAvatar(
       backgroundColor: Colors.grey,

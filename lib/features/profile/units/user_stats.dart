@@ -1,28 +1,27 @@
 part of '../view.dart';
 
 class _UserStats extends StatelessWidget {
-  const _UserStats({Key? key}) : super(key: key);
+  const _UserStats({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final mainCubit = MainCubit.of(context);
-    final userPostCubit = ProfileCubit.of(context);
+    final cubit = ProfileCubit.of(context);
 
     return BlocBuilder(
-      bloc: userPostCubit,
+      bloc: cubit,
       builder: (context, state) {
-        final int postLenth = userPostCubit.userPost.length;
-        return state is ProfiUserPostsLoadding?
+        final int postLenth = cubit.userPost.length;
+        return state is ProfileUserPostsLoadding?
             ? const LoadingIndicator()
             : Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   buildStatColumn(postLenth, "posts"),
-                  buildStatColumn(
-                      mainCubit.userData.followers.length, "followers"),
-                  buildStatColumn(
-                      mainCubit.userData.following.length, "following"),
+                  buildStatColumn(cubit.userData.followers.length, "followers"),
+                  buildStatColumn(cubit.userData.following.length, "following"),
                 ],
               );
       },

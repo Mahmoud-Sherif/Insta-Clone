@@ -17,12 +17,6 @@ class _SearchAppBar extends StatelessWidget with PreferredSizeWidget {
             decoration:
                 const InputDecoration(labelText: 'Search for a user...'),
             onSaved: (s) => cubit.text = s!,
-            // onFieldSubmitted: (String _) {
-            //   setState(() {
-            //     isShowUsers = true;
-            //   });
-            //   print(_);
-            // },
           ),
         ),
         actions: [

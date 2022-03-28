@@ -1,4 +1,5 @@
-part of'../view.dart';
+part of '../view.dart';
+
 class _SearchedUsers extends StatelessWidget {
   const _SearchedUsers({
     Key? key,
@@ -17,13 +18,10 @@ class _SearchedUsers extends StatelessWidget {
                   itemCount: cubit.searchedUser.length,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      // onTap: () => Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ProfileScreen(
-                      //       uid: (snapshot.data! as dynamic).docs[index]['uid'],
-                      //     ),
-                      //   ),
-                      // ),
+                      onTap: () {
+                        MagicRouter.navigateTo(
+                            ProfileView(uid: cubit.searchedUser[index].uid));
+                      },
                       child: ListTile(
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(

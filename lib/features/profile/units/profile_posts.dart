@@ -10,7 +10,7 @@ class _ProfilePosts extends StatelessWidget {
     return BlocBuilder(
       bloc: postCubit,
       builder: (context, state) {
-        return state is ProfiUserPostsFinshed
+        return state is ProfileUserPostsFinshed
             ? GridView.builder(
                 shrinkWrap: true,
                 itemCount: postCubit.userPost.length,

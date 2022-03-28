@@ -1,7 +1,9 @@
 part of '../view.dart';
 
 class _FollowButton extends StatelessWidget {
-  const _FollowButton({Key? key}) : super(key: key);
+  const _FollowButton({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,15 +11,16 @@ class _FollowButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        cubit.uid == FirebaseAuth.instance.currentUser!.uid
-            ? FollowButtonWid(
+        // cubit.uid == FirebaseAuth.instance.currentUser!.uid
+        //     ? 
+            FollowButtonWid(
                 text: 'Sign Out',
                 backgroundColor: mobileBackgroundColor,
                 textColor: primaryColor,
                 borderColor: Colors.grey,
                 function: cubit.signOut,
               )
-            :
+            // :
             // : isFollowing
             //     ? FollowButton(
             //         text: 'Unfollow',
@@ -38,24 +41,24 @@ class _FollowButton extends StatelessWidget {
             //         },
             //       )
             //     :
-            FollowButtonWid(
-                text: 'Follow',
-                backgroundColor: Colors.blue,
-                textColor: Colors.white,
-                borderColor: Colors.blue,
-                function: () async {
-                  // await FireStoreMethods().followUser(
-                  //   FirebaseAuth
-                  //       .instance.currentUser!.uid,
-                  //   userData['uid'],
-                  // );
+            // FollowButtonWid(
+            //     text: 'Follow',
+            //     backgroundColor: Colors.blue,
+            //     textColor: Colors.white,
+            //     borderColor: Colors.blue,
+            //     function: () async {
+            //       // await FireStoreMethods().followUser(
+            //       //   FirebaseAuth
+            //       //       .instance.currentUser!.uid,
+            //       //   userData['uid'],
+            //       // );
 
-                  // setState(() {
-                  //   isFollowing = true;
-                  //   followers++;
-                  // });
-                },
-              )
+            //       // setState(() {
+            //       //   isFollowing = true;
+            //       //   followers++;
+            //       // });
+            //     },
+            //   )
       ],
     );
   }

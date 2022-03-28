@@ -1,5 +1,7 @@
 import 'package:chat_app/const/colors.dart';
+import 'package:chat_app/core/routes/magic_router.dart';
 import 'package:chat_app/features/feed/cubit/feed_cubit.dart';
+import 'package:chat_app/features/profile/view.dart';
 import 'package:chat_app/features/search/cubit/search_cubit.dart';
 import 'package:chat_app/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +19,15 @@ class SearchView extends StatelessWidget {
     return BlocProvider(
       create: (context) => SearchCubit(),
       child: Scaffold(
-          appBar: const _SearchAppBar(),
-          body: BlocBuilder<SearchCubit, SearchState>(
-            builder: (context, state) {
-              return state is SearchInitial
-                  ? const _PostImageInSearch()
-                  : const _SearchedUsers();
-            },
-          )),
+        appBar: const _SearchAppBar(),
+        body: BlocBuilder<SearchCubit, SearchState>(
+          builder: (context, state) {
+            return state is SearchInitial
+                ? const _PostImageInSearch()
+                : const _SearchedUsers();
+          },
+        ),
+      ),
     );
   }
 }
